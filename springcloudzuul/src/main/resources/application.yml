@@ -1,0 +1,28 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:8761/eureka/
+spring:
+  application:
+    name: ZuulServer
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-wait:
+        max-idle: 8
+        min-idle: 0
+server:
+  port: 8000
+zuul:
+  routes:
+    ribbo:
+      path: /class/**
+      serviceId: ClassServer
+    feign:
+      path: /student/**
+      serviceId: StudentServer
+      sensitiveHeaders: Authorization
